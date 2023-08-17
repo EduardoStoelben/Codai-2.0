@@ -46,15 +46,16 @@
 
                         <div class="row">
                             <div class="col">
-                                <form id="login-form">
+                                <form name="form-login" id="login-form">
                                     <div class="mb-3">
                                       <label for="email-input" class="form-label">E-mail</label>
-                                      <input type="email" class="form-control" id="email-input" aria-describedby="emailHelp">
-                                      <div id="emailHelp" class="form-text">Ultilize seu e-mail para realizar login.</div>
+                                      <input name="emailLogin" class="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Ultilize seu e-mail para realizar login.">
+                                      <p class="error error-hidden">O e-mail é inválido.</p>
                                     </div>
                                     <div class="mb-3">
                                       <label for="password-input" class="form-label">Senha</label>
-                                      <input type="password" class="form-control" id="password-input">
+                                      <input type="password" name="passwordLogin" class="form-control" id="password-input" placeholder="Ultilize sua senha para realizar login.">
+                                      <p class="error error-hidden">A senha deve ter no mínimo 4 digitos.</p>
                                     </div>
                                     <div class="mb-3 form-check">
                                       <input type="checkbox" class="form-check-input" id="session-check">
@@ -98,17 +99,19 @@
           <h5 class="modal-title" id="exampleModalLabel">Crie sua conta</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-            <form id="create-form">
+            <form id="create-form" name="create-form">
                 <div class="modal-body">
                     
                         <div class="mb-3">
                         <label for="email-create-input" class="form-label">E-mail</label>
-                        <input type="email" class="form-control" id="email-create-input" aria-describedby="emailHelp" required>
+                        <input name="emailCreate" class="form-control" id="email-create-input" aria-describedby="emailHelp">
+                        <p class="error error-hidden">O e-mail é inválido.</p>
                         <div id="emailHelp" class="form-text">Ultilize seu e-mail para criar a conta.</div>
                         </div>
                         <div class="mb-3">
                         <label for="create-password-input" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="create-password-input" required>
+                        <input type="password" name="passwordCreate" class="form-control" id="create-password-input">
+                        <p class="error error-hidden">A senha deve ter no mínimo 4 digitos.</p>
                         <div id="emailHelp" class="form-text">Ultilize uma senha fácil de lembrar e anote para não esquecer.</div>
                         </div>
                 </div>

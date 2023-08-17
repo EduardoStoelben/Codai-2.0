@@ -3,12 +3,95 @@ const myModal = new bootstrap.Modal("#register-modal");
 let logged = sessionStorage.getItem("logged");
 const session = localStorage.getItem("session");
 
-checkLogged();
-//LOGAR
+
+//validação campo email e senha do login
+const isValidEmail = (email) => {
+  const regex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return regex.test(String(email).toLowerCase())
+}
+
+const inputPasswordLogin = document.querySelector('input[name="passwordLogin"]')
+const inputEmailLogin = document.querySelector('input[name="emailLogin"]')
+const inputPasswordCreate = document.querySelector('input[name="passwordCreate"]')
+const inputEmailCreate = document.querySelector('input[name="emailCreate"]')
+const formLogin = document.querySelector('form[name="form-login"]')
+const formCreate = document.querySelector('form[name="create-form"]')
+
+let isValidFormLogin = false
+let isValidFormCreate = false
 
 
-document.getElementById("login-form").addEventListener("submit", function(e){
-    e.preventDefault();
+const resetInput = (elem) => {
+  elem.classList.remove('invalid')
+  elem.nextElementSibling.classList.add('error-hidden')
+}
+
+const invalidateElem = (elem) => {
+  elem.classList.add('invalid')
+  elem.nextElementSibling.classList.remove('error-hidden')
+  isValidFormLogin = false
+}
+
+const validateInputLogin = () => {
+  isValidFormLogin = true
+  if(inputPasswordLogin.value.length <= 3){
+    invalidateElem(inputPasswordLogin)
+  }
+
+  if(!isValidEmail(inputEmailLogin.value)){
+    inputEmailLogin.classList.add('invalid')
+    inputEmailLogin.nextElementSibling.classList.remove('error-hidden')
+    isValidFormLogin = false
+  }
+}
+
+const validateInputCreate = () => {
+  isValidFormCreate = true
+  if(inputPasswordCreate.value.length <= 3){
+    invalidateElem(inputPasswordCreate)
+  }
+
+  if(!isValidEmail(inputEmailCreate.value)){
+    inputEmailCreate.classList.add('invalid')
+    inputEmailCreate.nextElementSibling.classList.remove('error-hidden')
+    isValidFormCreate = false
+  }
+}
+
+formCreate.addEventListener("submit", (e) => {
+  e.preventDefault()
+  validateInputCreate()
+
+  if(isValidFormCreate){
+
+    const email = document.getElementById("email-create-input").value;
+    const password = document.getElementById("create-password-input").value;
+
+    if(password.length < 4){
+        return;
+    }
+
+    saveAccount({
+        login: email,
+        password: password,
+        transactions: []
+
+    });
+
+    myModal.hide();
+
+    alert("Conta criada com sucesso!");
+
+  }
+
+})
+
+formLogin.addEventListener("submit", (e) => {
+  e.preventDefault()
+  validateInputLogin()
+
+  if(isValidFormLogin){
 
     const email = document.getElementById("email-input").value;
     const password = document.getElementById("password-input").value;
@@ -32,39 +115,26 @@ document.getElementById("login-form").addEventListener("submit", function(e){
         window.location.href = "home.html";
 
     }
+  }
+})
 
-});
+inputPasswordLogin.addEventListener('input', () => {
+  resetInput(inputPasswordLogin)
+})
 
-//CRIAR CONTA
+inputEmailLogin.addEventListener("input", () =>{
+  resetInput(inputEmailLogin)
+})
 
-document.getElementById("create-form").addEventListener("submit", function(e) {
-    e.preventDefault();
+inputPasswordCreate.addEventListener('input', () => {
+  resetInput(inputPasswordCreate)
+})
 
-    const email = document.getElementById("email-create-input").value;
-    const password = document.getElementById("create-password-input").value;
+inputEmailCreate.addEventListener("input", () =>{
+  resetInput(inputEmailCreate)
+})
 
-    if(email.length < 5) {
-        alert("Preencha o campo com o e-mail válido!");
-        return;
-    }
-
-    if(password.length < 4){
-        alert("Preencha a senha com no mínimo 4 digitos");
-        return;
-    }
-
-    saveAccount({
-        login: email,
-        password: password,
-        transactions: []
-
-    });
-
-    myModal.hide();
-
-    alert("Conta criada com sucesso!");
-
-});
+checkLogged();
 
 function checkLogged(){
     if(session){

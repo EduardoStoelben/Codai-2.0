@@ -12,6 +12,14 @@ header{
     background-color: #ffffff;
 }
 
+.inputField input {
+    width: 320px;
+    padding: 10px;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 4px;
+  }
+
 .color-primary{
 color: #4e0070;
 }
@@ -103,3 +111,15 @@ color: #4e0070;
     margin-right: 20px;
 }
 
+.error-hidden {
+    display: none;
+  }
+
+.error {
+  font-size: 12px;
+  color: red;
+}
+
+.invalid {
+    border: 1px solid red;
+  }
