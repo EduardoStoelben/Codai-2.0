@@ -61,14 +61,20 @@ const validateInputCreate = () => {
 
 formCreate.addEventListener("submit", (e) => {
   e.preventDefault()
-  validateInputCreate()
+  //validateInputCreate()
 
-  if(isValidFormCreate){
+  //if(isValidFormCreate){
 
     const email = document.getElementById("email-create-input").value;
     const password = document.getElementById("create-password-input").value;
 
+    if(!isValidEmail(inputEmailCreate.value)){
+      alert("O e-mail é inválido.");
+      return;
+    }
+
     if(password.length < 4){
+        alert("A senha deve ter no mínimo 4 digitos.");
         return;
     }
 
@@ -83,7 +89,7 @@ formCreate.addEventListener("submit", (e) => {
 
     alert("Conta criada com sucesso!");
 
-  }
+  //}
 
 })
 
