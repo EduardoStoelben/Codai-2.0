@@ -69,12 +69,26 @@ formCreate.addEventListener("submit", (e) => {
     const password = document.getElementById("create-password-input").value;
 
     if(!isValidEmail(inputEmailCreate.value)){
-      alert("O e-mail é inválido.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'O e-mail é inválido.',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      //alert("O e-mail é inválido.");
       return;
     }
 
     if(password.length < 4){
-        alert("A senha deve ter no mínimo 4 digitos.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'A senha deve ter no mínimo 4 digitos.',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        //alert("A senha deve ter no mínimo 4 digitos.");
         return;
     }
 
@@ -87,7 +101,14 @@ formCreate.addEventListener("submit", (e) => {
 
     myModal.hide();
 
-    alert("Conta criada com sucesso!");
+    Swal.fire({
+      //position: 'top-end',
+      icon: 'success',
+      text: 'Conta criada com sucesso!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    //alert("Conta criada com sucesso!");
 
   //}
 
@@ -95,9 +116,9 @@ formCreate.addEventListener("submit", (e) => {
 
 formLogin.addEventListener("submit", (e) => {
   e.preventDefault()
-  validateInputLogin()
+  //validateInputLogin()
 
-  if(isValidFormLogin){
+  //if(isValidFormLogin){
 
     const email = document.getElementById("email-input").value;
     const password = document.getElementById("password-input").value;
@@ -106,13 +127,27 @@ formLogin.addEventListener("submit", (e) => {
     const account = getAccount(email);
 
     if(!account){
-        alert("Opps! Verifique o usuário ou a senha.")
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Verifique o usuário ou a senha.',
+        showConfirmButton: false,
+        timer: 2000
+      })
+        //alert("Opps! Verifique o usuário ou a senha.")
         return;
     }
 
     if(account){
         if(account.password !== password){
-            alert("Opps! Verifique o usuário ou a senha.")
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Verifique o usuário ou a senha.',
+            showConfirmButton: false,
+            timer: 2000
+          })
+            //alert("Opps! Verifique o usuário ou a senha.")
         return;
         }
         
@@ -121,7 +156,7 @@ formLogin.addEventListener("submit", (e) => {
         window.location.href = "home.html";
 
     }
-  }
+  //}
 })
 
 inputPasswordLogin.addEventListener('input', () => {
